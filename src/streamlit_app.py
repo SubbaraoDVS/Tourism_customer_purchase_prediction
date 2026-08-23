@@ -8,7 +8,7 @@ import joblib
 def load_model():
 
     return joblib.load(
-        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/models/tourism_purchase_model.joblib"
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
     )
 
 
