@@ -1,0 +1,22 @@
+artifact_path: file:///content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns/965780010728612756/models/m-d9e5f9142ae7494db83d1add8b5d348a/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.15
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+mlflow_version: 3.0.1
+model_id: m-d9e5f9142ae7494db83d1add8b5d348a
+model_size_bytes: 3750017
+model_uuid: m-d9e5f9142ae7494db83d1add8b5d348a
+prompts: null
+run_id: 6d8eb66adf7b40b58d55e06a61feaa64
+utc_time_created: '2026-08-23 15:26:53.486900'
