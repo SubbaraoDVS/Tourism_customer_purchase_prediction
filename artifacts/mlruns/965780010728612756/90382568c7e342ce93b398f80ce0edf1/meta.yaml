@@ -1,0 +1,14 @@
+artifact_uri: file:///content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns/965780010728612756/90382568c7e342ce93b398f80ce0edf1/artifacts
+end_time: 1787475115623
+entry_point_name: ''
+experiment_id: '965780010728612756'
+lifecycle_stage: active
+run_id: 90382568c7e342ce93b398f80ce0edf1
+run_name: Final_Model_Registration
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1787475111680
+status: 3
+tags: []
+user_id: root
