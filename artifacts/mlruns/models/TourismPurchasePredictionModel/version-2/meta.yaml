@@ -1,0 +1,18 @@
+aliases: []
+creation_timestamp: 1787498817931
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1787498817931
+metrics: null
+model_id: m-d9e5f9142ae7494db83d1add8b5d348a
+name: TourismPurchasePredictionModel
+params: null
+run_id: 6d8eb66adf7b40b58d55e06a61feaa64
+run_link: null
+source: models:/m-d9e5f9142ae7494db83d1add8b5d348a
+status: READY
+status_message: null
+storage_location: file:///content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns/965780010728612756/models/m-d9e5f9142ae7494db83d1add8b5d348a/artifacts
+user_id: null
+version: 2
