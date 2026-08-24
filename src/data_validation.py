@@ -78,7 +78,7 @@ if __name__ == "__main__":
 if __name__ == "__main__":
 
     report = validate_data(
-        "data/Tourism.csv"
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/data/tourism.csv"
     )
 
     print(report)
