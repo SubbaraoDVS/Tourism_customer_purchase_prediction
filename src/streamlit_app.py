@@ -21,21 +21,22 @@ st.set_page_config(
 # PROJECT BASE DIRECTORY
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+# Define the absolute path to the project root in Google Drive
+BASE_PROJECT_ROOT = Path("/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction")
 
 
-# ============================================================
+# ============================================================s
 # FILE PATHS
 # ============================================================
 
+# Construct paths relative to the project root
 MODEL_PATH = (
-    BASE_DIR /
+    BASE_PROJECT_ROOT / "src" / # Model is inside 'src' directory
     "tourism_purchase_model.joblib"
 )
 
 TRAIN_DATA_PATH = (
-    BASE_DIR /
-    "artifacts" /
+    BASE_PROJECT_ROOT / "artifacts" / # Train data is inside 'artifacts' directory
     "train.csv"
 )
 
