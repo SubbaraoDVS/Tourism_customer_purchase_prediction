@@ -1,0 +1,10 @@
+artifact_location: file:///content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns/965780010728612756/models/m-371d1bbc348a4bda816f78542f78754e/artifacts
+creation_timestamp: 1787558767435
+experiment_id: '965780010728612756'
+last_updated_timestamp: 1787558771394
+model_id: m-371d1bbc348a4bda816f78542f78754e
+model_type: null
+name: gradient_boosting_model
+source_run_id: fe9b19d2f61b4939a3b22ca07518d935
+status: 2
+status_message: null
