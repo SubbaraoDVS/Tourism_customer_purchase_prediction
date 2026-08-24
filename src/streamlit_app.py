@@ -23,7 +23,7 @@ st.set_page_config(
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "tourism_purchase_model.joblib"
-TRAIN_DATA_PATH = BASE_DIR / "artifacts/train.csv"
+TRAIN_DATA_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/train.csv"
 TARGET_COLUMN = "ProdTaken"
 
 
