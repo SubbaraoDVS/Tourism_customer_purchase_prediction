@@ -1,0 +1,10 @@
+artifact_location: file:///content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns/965780010728612756/models/m-187fd74553504ded88f257be3ac68d9b/artifacts
+creation_timestamp: 1787559731473
+experiment_id: '965780010728612756'
+last_updated_timestamp: 1787559734958
+model_id: m-187fd74553504ded88f257be3ac68d9b
+model_type: null
+name: model
+source_run_id: d8c532bd3c0343a782367d99fcb398e8
+status: 2
+status_message: null
