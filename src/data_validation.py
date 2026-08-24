@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 
-DATA_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_predictiondata/tourism.csv"
+DATA_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/data/tourism.csv"
 TARGET_COLUMN = "ProdTaken"
 
 
