@@ -25,13 +25,13 @@ st.set_page_config(
 BASE_PROJECT_ROOT = Path("/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction")
 
 
-# ============================================================s
+# ============================================================
 # FILE PATHS
 # ============================================================
 
 # Construct paths relative to the project root
 MODEL_PATH = (
-    BASE_PROJECT_ROOT / "src" / # Model is inside 'src' directory
+    BASE_PROJECT_ROOT / "models" / # Model is inside 'models' directory
     "tourism_purchase_model.joblib"
 )
 
