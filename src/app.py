@@ -1,5 +1,4 @@
 
-import streamlit as st
 import pandas as pd
 import joblib
 from pathlib import Path
@@ -37,6 +36,8 @@ def load_train_data():
 
 model = load_model()
 train_df = load_train_data()
+
+import streamlit as st
 
 st.set_page_config(
     page_title="Tourism Purchase Prediction",
