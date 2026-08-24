@@ -30,13 +30,11 @@ from sklearn.ensemble import (
 
 TARGET_COLUMN = "ProdTaken"
 
-# Define the base path for accessing files within the Colab environment
-BASE_PROJECT_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction"
 
 def train_model():
 
     train_df = pd.read_csv(
-        Path(BASE_PROJECT_PATH) / "artifacts" / "train.csv"
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/train.csv"
     )
 
     X_train = train_df.drop(
@@ -157,7 +155,7 @@ def train_model():
     )
 
     mlflow.set_tracking_uri(
-        Path(BASE_PROJECT_PATH) / "artifacts" / "mlruns"
+        "file:/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/articrafts/mlruns"
     )
 
     mlflow.set_experiment(
@@ -188,12 +186,15 @@ def train_model():
             name="model"
         )
 
-        # Save the model to the src directory as specified by deployment instructions
-        model_save_path = Path(BASE_PROJECT_PATH) / "src" / "tourism_purchase_model.joblib"
-        model_save_path.parent.mkdir(parents=True, exist_ok=True)
+        Path("models").mkdir(
+            exist_ok=True
+        )
+
         joblib.dump(
+
             pipeline,
-            model_save_path
+
+            "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
         )
 
         print(
