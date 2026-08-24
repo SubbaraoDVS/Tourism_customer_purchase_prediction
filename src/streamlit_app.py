@@ -21,24 +21,23 @@ st.set_page_config(
 # PROJECT BASE DIRECTORY
 # ============================================================
 
-# Define the absolute path to the project root in Google Drive
-BASE_PROJECT_ROOT = Path("/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction")
+from pathlib import Path
 
+# Directory containing streamlit_app.py
+BASE_DIR = Path(__file__).resolve().parent
 
-# ============================================================
-# FILE PATHS
-# ============================================================
+# Project root directory
+PROJECT_DIR = BASE_DIR.parent
 
-# Construct paths relative to the project root
+# Model is inside src/
 MODEL_PATH = (
-    BASE_PROJECT_ROOT / "models" / # Model is inside 'models' directory
+    PROJECT_DIR /
+    "models" /
     "tourism_purchase_model.joblib"
 )
 
-TRAIN_DATA_PATH = (
-    BASE_PROJECT_ROOT / "artifacts" / # Train data is inside 'artifacts' directory
-    "train.csv"
-)
+# Training data is inside artifacts/
+TRAIN_DATA_PATH = PROJECT_DIR / "artifacts" / "train.csv"
 
 TARGET_COLUMN = "ProdTaken"
 
