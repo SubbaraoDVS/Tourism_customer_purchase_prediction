@@ -1,9 +1,15 @@
 
 import streamlit as st
+
+st.set_page_config(
+    page_title="Tourism Purchase Prediction",
+    page_icon="✈️",
+    layout="wide"
+)
 import pandas as pd
 import joblib
 from pathlib import Path
-import joblib
+
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -17,13 +23,6 @@ def load_model():
 
 
 model = load_model()
-
-
-st.set_page_config(
-    page_title="Tourism Purchase Prediction",
-    page_icon="✈️",
-    layout="wide"
-)
 
 
 st.title(
