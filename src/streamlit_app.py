@@ -6,8 +6,8 @@ from pathlib import Path
 
 
 # ============================================================
-# 1. STREAMLIT PAGE CONFIGURATION
-# IMPORTANT: This must be the first Streamlit command
+# PAGE CONFIGURATION
+# MUST BE THE FIRST STREAMLIT COMMAND
 # ============================================================
 
 st.set_page_config(
@@ -18,92 +18,100 @@ st.set_page_config(
 
 
 # ============================================================
-# 2. PROJECT CONFIGURATION
+# PROJECT PATH
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "tourism_purchase_model.joblib"
-TRAIN_DATA_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/train.csv"
+PROJECT_PATH = (
+    "/content/drive/My Drive/"
+    "Colab_Notebooks/"
+    "tourism_package_prediction"
+)
+
+
+# ============================================================
+# FILE PATHS
+# ============================================================
+
+MODEL_PATH = (
+    f"{PROJECT_PATH}/models/"
+    "tourism_purchase_model.joblib"
+)
+
+TRAIN_DATA_PATH = (
+    f"{PROJECT_PATH}/artifacts/"
+    "train.csv"
+)
+
 TARGET_COLUMN = "ProdTaken"
 
 
 # ============================================================
-# 3. LOAD TRAINED MODEL
+# LOAD MODEL
 # ============================================================
 
 @st.cache_resource
 def load_model():
 
-    model = joblib.load(MODEL_PATH)
-
-    return model
+    return joblib.load(
+        MODEL_PATH
+    )
 
 
 # ============================================================
-# 4. LOAD TRAINING DATA
-# Used to dynamically create Streamlit input fields
+# LOAD TRAINING DATA
 # ============================================================
 
 @st.cache_data
 def load_training_data():
 
-    train_df = pd.read_csv(TRAIN_DATA_PATH)
-
-    return train_df
+    return pd.read_csv(
+        TRAIN_DATA_PATH
+    )
 
 
 # ============================================================
-# 5. APPLICATION TITLE
+# TITLE
 # ============================================================
 
-st.title("✈️ Tourism Package Purchase Prediction")
-
-st.write(
-    """
-    Enter customer information below to predict whether
-    the customer is likely to purchase a tourism package.
-    """
+st.title(
+    "✈️ Tourism Package Purchase Prediction"
 )
 
-st.divider()
-
 
 # ============================================================
-# 6. CHECK REQUIRED FILES
+# CHECK MODEL
 # ============================================================
 
 if not Path(MODEL_PATH).exists():
 
     st.error(
-        f"""
-        Model file not found:
-
-        {MODEL_PATH}
-
-        Please train the model before running the Streamlit app.
-        """
-    )
-
-    st.stop()
-
-
-if not Path(TRAIN_DATA_PATH).exists():
-
-    st.error(
-        f"""
-        Training data file not found:
-
-        {TRAIN_DATA_PATH}
-
-        Please run the data preparation step first.
-        """
+        f"Model file not found:\n\n{MODEL_PATH}"
     )
 
     st.stop()
 
 
 # ============================================================
-# 7. LOAD MODEL AND DATA
+# CHECK TRAIN DATA
+# ============================================================
+
+if not Path(TRAIN_DATA_PATH).exists():
+
+    st.error(
+        f"""
+Training data file not found:
+
+{TRAIN_DATA_PATH}
+
+Please run the data preparation step first.
+"""
+    )
+
+    st.stop()
+
+
+# ============================================================
+# LOAD FILES
 # ============================================================
 
 model = load_model()
@@ -112,118 +120,94 @@ train_df = load_training_data()
 
 
 # ============================================================
-# 8. IDENTIFY FEATURE COLUMNS
+# FEATURE COLUMNS
 # ============================================================
 
 feature_columns = [
 
     column
-
     for column in train_df.columns
-
     if column != TARGET_COLUMN
 
 ]
 
 
 # ============================================================
-# 9. CREATE CUSTOMER INPUT FORM
+# CUSTOMER INPUT FORM
 # ============================================================
 
-st.subheader("Customer Information")
-
+st.subheader(
+    "Enter Customer Information"
+)
 
 input_data = {}
 
 
 with st.form("prediction_form"):
 
-    # Create two columns for better UI
     col1, col2 = st.columns(2)
 
 
     for index, column in enumerate(feature_columns):
 
-        # Alternate between left and right column
-        current_column = col1 if index % 2 == 0 else col2
+        current_column = (
+            col1
+            if index % 2 == 0
+            else col2
+        )
 
 
         with current_column:
 
-
-            # ====================================================
-            # CATEGORICAL VARIABLES
-            # ====================================================
-
+            # CATEGORICAL FEATURES
             if (
                 train_df[column].dtype == "object"
-                or str(train_df[column].dtype) == "category"
+                or str(train_df[column].dtype)
+                == "category"
             ):
 
                 options = (
-
                     train_df[column]
                     .dropna()
                     .unique()
                     .tolist()
-
                 )
 
-                input_data[column] = st.selectbox(
-
-                    label=column,
-
-                    options=options
-
+                input_data[column] = (
+                    st.selectbox(
+                        column,
+                        options
+                    )
                 )
 
 
-            # ====================================================
-            # NUMERICAL VARIABLES
-            # ====================================================
-
+            # NUMERICAL FEATURES
             else:
 
                 median_value = float(
-
                     train_df[column]
                     .median()
-
                 )
-
 
                 min_value = float(
-
                     train_df[column]
                     .min()
-
                 )
-
 
                 max_value = float(
-
                     train_df[column]
                     .max()
-
                 )
 
-
-                input_data[column] = st.number_input(
-
-                    label=column,
-
-                    min_value=min_value,
-
-                    max_value=max_value,
-
-                    value=median_value
-
+                input_data[column] = (
+                    st.number_input(
+                        column,
+                        min_value=min_value,
+                        max_value=max_value,
+                        value=median_value
+                    )
                 )
 
-
-    # ============================================================
-    # PREDICTION BUTTON
-    # ============================================================
 
     submitted = st.form_submit_button(
         "🔮 Predict Purchase"
@@ -231,45 +215,39 @@ with st.form("prediction_form"):
 
 
 # ============================================================
-# 10. MAKE PREDICTION
+# PREDICTION
 # ============================================================
 
 if submitted:
 
     try:
 
-        # Convert user inputs into DataFrame
         input_df = pd.DataFrame(
             [input_data]
         )
 
-
-        # Ensure column order matches training data
+        # Ensure feature order
         input_df = input_df[
             feature_columns
         ]
 
 
-        # Generate prediction
         prediction = model.predict(
             input_df
         )[0]
 
 
-        # Generate probability
         probability = (
-
             model
             .predict_proba(
                 input_df
             )[0][1]
-
         )
 
 
-        # ========================================================
-        # 11. DISPLAY RESULT
-        # ========================================================
+        # ====================================================
+        # DISPLAY RESULT
+        # ====================================================
 
         st.divider()
 
@@ -278,7 +256,9 @@ if submitted:
         )
 
 
-        result_col1, result_col2 = st.columns(2)
+        result_col1, result_col2 = (
+            st.columns(2)
+        )
 
 
         with result_col1:
@@ -299,17 +279,14 @@ if submitted:
         with result_col2:
 
             st.metric(
-
-                label="Purchase Probability",
-
-                value=f"{probability:.2%}"
-
+                "Purchase Probability",
+                f"{probability:.2%}"
             )
 
 
-        # ========================================================
-        # 12. BUSINESS RECOMMENDATION
-        # ========================================================
+        # ====================================================
+        # BUSINESS RECOMMENDATION
+        # ====================================================
 
         st.subheader(
             "Recommended Business Action"
@@ -320,12 +297,12 @@ if submitted:
 
             st.success(
                 """
-                HIGH-POTENTIAL CUSTOMER
+HIGH-POTENTIAL CUSTOMER
 
-                Recommended action:
-                Prioritize this customer for immediate sales follow-up,
-                personalized offers, and direct communication.
-                """
+Recommended Action:
+Prioritize this customer for immediate
+sales follow-up and personalized offers.
+"""
             )
 
 
@@ -333,12 +310,12 @@ if submitted:
 
             st.info(
                 """
-                MEDIUM-POTENTIAL CUSTOMER
+MEDIUM-POTENTIAL CUSTOMER
 
-                Recommended action:
-                Use personalized email campaigns, promotional offers,
-                and follow-up marketing.
-                """
+Recommended Action:
+Use personalized marketing campaigns,
+promotional offers, and follow-ups.
+"""
             )
 
 
@@ -346,33 +323,18 @@ if submitted:
 
             st.warning(
                 """
-                LOW-POTENTIAL CUSTOMER
+LOW-POTENTIAL CUSTOMER
 
-                Recommended action:
-                Use low-cost digital marketing campaigns and avoid
-                allocating expensive sales resources.
-                """
-            )
-
-
-        # ========================================================
-        # 13. SHOW CUSTOMER INPUT DATA
-        # ========================================================
-
-        with st.expander(
-            "View Customer Input Data"
-        ):
-
-            st.dataframe(
-                input_df,
-                use_container_width=True
+Recommended Action:
+Use low-cost digital marketing campaigns.
+"""
             )
 
 
     except Exception as e:
 
         st.error(
-            "An error occurred while making the prediction."
+            "Prediction failed."
         )
 
         st.exception(e)
