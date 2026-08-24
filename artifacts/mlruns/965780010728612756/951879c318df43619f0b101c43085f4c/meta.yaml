@@ -1,0 +1,14 @@
+artifact_uri: file:///content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns/965780010728612756/951879c318df43619f0b101c43085f4c/artifacts
+end_time: 1787559028860
+entry_point_name: ''
+experiment_id: '965780010728612756'
+lifecycle_stage: active
+run_id: 951879c318df43619f0b101c43085f4c
+run_name: Random_Forest_Recall_Optimization
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1787558962473
+status: 3
+tags: []
+user_id: root
