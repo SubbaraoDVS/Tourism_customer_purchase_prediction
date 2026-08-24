@@ -3,8 +3,6 @@ import pandas as pd
 import joblib
 import json
 
-from pathlib import Path
-
 from sklearn.metrics import (
 
     accuracy_score,
@@ -23,13 +21,11 @@ TARGET_COLUMN = "ProdTaken"
 
 MIN_F1_SCORE = 0.60
 
-# Define the base path for accessing files within the Colab environment
-BASE_PROJECT_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction"
 
 def evaluate_model():
 
     test_df = pd.read_csv(
-        Path(BASE_PROJECT_PATH) / "artifacts" / "test.csv"
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/test.csv"
     )
 
     X_test = test_df.drop(
@@ -40,9 +36,9 @@ def evaluate_model():
         TARGET_COLUMN
     ]
 
-    # Load the model from the src directory
-    model_load_path = Path(BASE_PROJECT_PATH) / "src" / "tourism_purchase_model.joblib"
-    model = joblib.load(model_load_path)
+    model = joblib.load(
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
+    )
 
     predictions = model.predict(
         X_test
@@ -112,11 +108,8 @@ def evaluate_model():
 
     print(metrics)
 
-    # Save metrics to artifacts directory
-    metrics_save_path = Path(BASE_PROJECT_PATH) / "artifacts" / "model_metrics.json"
-    metrics_save_path.parent.mkdir(parents=True, exist_ok=True)
     with open(
-        metrics_save_path,
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/model_metrics.json",
         "w"
     ) as file:
 
