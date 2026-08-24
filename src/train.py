@@ -155,7 +155,7 @@ def train_model():
     )
 
     mlflow.set_tracking_uri(
-        "file:/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/articrafts/mlruns"
+        "file:/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/artifacts/mlruns"
     )
 
     mlflow.set_experiment(
@@ -186,15 +186,17 @@ def train_model():
             name="model"
         )
 
-        Path("models").mkdir(
+        # Corrected: Create 'models' directory and save model there
+        MODEL_DIR = Path("/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/models")
+        MODEL_DIR.mkdir(
+            parents=True,
             exist_ok=True
         )
-
         joblib.dump(
 
             pipeline,
 
-            "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
+            MODEL_DIR / "tourism_purchase_model.joblib"
         )
 
         print(
