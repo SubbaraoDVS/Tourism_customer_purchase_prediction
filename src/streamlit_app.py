@@ -30,7 +30,6 @@ BASE_DIR = Path(__file__).resolve().parent
 
 MODEL_PATH = (
     BASE_DIR /
-    "src" /
     "tourism_purchase_model.joblib"
 )
 
