@@ -11,31 +11,32 @@ from pathlib import Path
 # ============================================================
 
 st.set_page_config(
-    page_title="Tourism Purchase Prediction",
+    page_title="Tourism Package Purchase Prediction",
     page_icon="✈️",
     layout="wide"
 )
 
 
 # ============================================================
-# PROJECT PATH
+# PROJECT BASE DIRECTORY
 # ============================================================
 
-PROJECT_PATH = (
-    "/content/drive/My Drive/"
-    "Colab_Notebooks/"
-    "tourism_package_prediction"
-)
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # ============================================================
 # FILE PATHS
 # ============================================================
 
-MODEL_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
+MODEL_PATH = (
+    BASE_DIR /
+    "src" /
+    "tourism_purchase_model.joblib"
+)
 
 TRAIN_DATA_PATH = (
-    f"{PROJECT_PATH}/artifacts/"
+    BASE_DIR /
+    "artifacts" /
     "train.csv"
 )
 
