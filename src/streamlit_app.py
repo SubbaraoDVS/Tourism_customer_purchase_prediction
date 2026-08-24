@@ -33,7 +33,7 @@ PROJECT_PATH = (
 # ============================================================
 
 MODEL_PATH = (
-    f"{PROJECT_PATH}/models/"
+    f"{PROJECT_PATH}/src/"
     "tourism_purchase_model.joblib"
 )
 
