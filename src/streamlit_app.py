@@ -32,10 +32,7 @@ PROJECT_PATH = (
 # FILE PATHS
 # ============================================================
 
-MODEL_PATH = (
-    f"{PROJECT_PATH}/src/"
-    "tourism_purchase_model.joblib"
-)
+MODEL_PATH = "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
 
 TRAIN_DATA_PATH = (
     f"{PROJECT_PATH}/artifacts/"
