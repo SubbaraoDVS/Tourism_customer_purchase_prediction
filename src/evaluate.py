@@ -37,7 +37,7 @@ def evaluate_model():
     ]
 
     model = joblib.load(
-        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/tourism_purchase_model.joblib"
+        "/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/models/tourism_purchase_model.joblib"
     )
 
     predictions = model.predict(
