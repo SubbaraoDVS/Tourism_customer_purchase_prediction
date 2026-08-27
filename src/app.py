@@ -7,7 +7,7 @@ from pathlib import Path
 BASE_PROJECT_PATH_DRIVE = Path("/content/drive/My Drive/Colab_Notebooks/tourism_package_prediction")
 
 # Define paths for the model and training data directly on Google Drive
-MODEL_PATH_DRIVE = BASE_PROJECT_PATH_DRIVE / "src" / "tourism_purchase_model.joblib"
+MODEL_PATH_DRIVE = BASE_PROJECT_PATH_DRIVE / "models" / "tourism_purchase_model.joblib"
 TRAIN_DATA_PATH_DRIVE = BASE_PROJECT_PATH_DRIVE / "artifacts" / "train.csv"
 
 @st.cache_resource
