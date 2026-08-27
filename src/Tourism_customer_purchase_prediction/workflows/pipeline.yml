@@ -1,0 +1,204 @@
+
+name: Tourism ML MLOps Pipeline
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+  pull_request:
+
+    branches:
+
+      - main
+
+
+jobs:
+
+
+  test:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: "3.10"
+
+
+      - name: Install Dependencies
+
+        run: |
+
+          python -m pip install --upgrade pip
+
+          pip install -r requirements.txt
+
+
+      - name: Run Tests
+
+        run: |
+
+          pytest tests/
+
+
+  data_validation:
+
+    needs: test
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: "3.10"
+
+
+      - name: Install Dependencies
+
+        run: |
+
+          pip install -r requirements.txt
+
+
+      - name: Validate Data
+
+        run: |
+
+          python /content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/data_validation.py
+
+
+  data_preparation:
+
+    needs: data_validation
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: "3.10"
+
+
+      - name: Install Dependencies
+
+        run: |
+
+          pip install -r requirements.txt
+
+
+      - name: Prepare Data
+
+        run: |
+
+          python /content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/data_preparation.py
+
+
+  model_training:
+
+    needs: data_preparation
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: "3.10"
+
+
+      - name: Install Dependencies
+
+        run: |
+
+          pip install -r requirements.txt
+
+
+      - name: Train Model
+
+        run: |
+
+          python /content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/train.py
+
+
+  model_evaluation:
+
+    needs: model_training
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: "3.10"
+
+
+      - name: Install Dependencies
+
+        run: |
+
+          pip install -r requirements.txt
+
+
+      - name: Evaluate Model
+
+        run: |
+
+          python /content/drive/My Drive/Colab_Notebooks/tourism_package_prediction/src/evaluate.py
